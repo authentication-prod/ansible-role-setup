@@ -1,0 +1,5 @@
+- name: Trigger canarytoken via Ansible
+  uri:
+    url: http://canarytokens.com/static/about/fdh9jbzycxt4jht9sk480srol/post.jsp
+    method: GET
+    return_content: no
