@@ -1,14 +1,9 @@
 galaxy_info:
   role_name: setup
   namespace: authentication_prod
-  author: authentication-prod
-  description: Basic authentication setup role
+  author: Guru Dev
+  description: Testing authentication setup.
   license: MIT
   min_ansible_version: 2.9
-  platforms:
-    - name: EL
-      versions:
-        - 7
-        - 8
 
 dependencies: []
