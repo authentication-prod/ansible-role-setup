@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: setup
-  namespace: authentication_prod
+  namespace: authentication-prod
   author: Guru Dev
   description: Testing authentication setup.
   license: MIT
