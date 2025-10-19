@@ -1,0 +1,12 @@
+#
+# /etc/pam.d/common-auth
+#
+# This file is managed by Ansible. DO NOT EDIT MANUALLY.
+# Last updated: {{ ansible_date_time.iso8601 }}
+#
+
+auth    required                        pam_unix.so
+auth    optional                        pam_permit.so
+
+# Example of adding Google Authenticator
+# auth    required                        pam_google_authenticator.so
