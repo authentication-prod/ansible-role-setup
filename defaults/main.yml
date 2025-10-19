@@ -1,0 +1,5 @@
+# Whether to install Google Authenticator PAM module for 2FA capabilities
+auth_setup_install_google_auth: true
+
+# System user to be created for security and audit purposes
+auth_setup_audit_user: "audit-svc"
